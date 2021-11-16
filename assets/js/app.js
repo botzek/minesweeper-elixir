@@ -50,7 +50,7 @@ Hooks.NewGame = {
         let hook = this
 
         document.body.querySelector("input[name='difficulty']").checked = true;
-        hook.el.parentNode.addEventListener("click", function(e) {
+        hook.el.addEventListener("click", function(e) {
             e.preventDefault()
 
             let selectedDifficulty = document.body.querySelector("input[name='difficulty']:checked")
