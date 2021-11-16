@@ -36,6 +36,9 @@ Hooks.ToggleFlag = {
             let col = hook.el.getAttribute("phx-value-col")
             hook.pushEvent("toggle_flag", {"row": row, "col": col})
         }
+
+        // destroyed is called after the element is removed from the DOM, so we need to store
+        // a reference to the parent node on the hook.
         hook.parentNode = hook.el.parentNode
         hook.el.parentNode.addEventListener("contextmenu", hook.eventListener)
     },
