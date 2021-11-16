@@ -51,6 +51,28 @@
     <% end %>
     </div>
     <div>
-        <button phx-click="new_game">New Game</button>
+        <button id="new-game-button" phx-hook="NewGame">New Game</button>
+    </div>
+    <div>
+        <hr />
+        <h2>Game Settings</h2>
+        <div phx-update="ignore">
+            <table>
+                <tr>
+                    <th>&nbsp;</th>
+                    <th>Rows</th>
+                    <th>Columns</th>
+                    <th>Mines</th>
+                </tr>
+                <%= for difficulty <- @game_difficulties do %>
+                    <tr>
+                        <td><label><input type="radio" name="difficulty" value={difficulty.id} default/> <%= difficulty.name %></label></td>
+                        <td><%= difficulty.rows %></td>
+                        <td><%= difficulty.cols %></td>
+                        <td><%= difficulty.mine_count %></td>
+                    </tr>
+                <% end %>
+            </table>
+        </div>
     </div>
 </div>

@@ -17,10 +17,23 @@ defmodule Minesweeper.Game do
     for r <- 1..rows, c <- 1..cols, into: %{}, do: {{r, c}, :hidden}
   end
 
-  def new(:trivial), do: new(9, 9, 5)
-  def new(:beginner), do: new(9, 9, 10)
-  def new(:intermediate), do: new(16, 16, 40)
-  def new(:expert), do: new(16, 30, 99)
+  def new(difficulty_id) do
+    with {:ok, difficulty} <- difficulties() |> Enum.filter(fn s -> s.id == difficulty_id end) |> Enum.fetch(0)
+    do
+      new(difficulty.rows, difficulty.cols, difficulty.mine_count)
+    else
+      :error -> raise ArgumentError, message: "Unknown difficulty #{difficulty_id}"
+    end
+  end
+
+  def difficulties() do
+    [
+      %{id: "trivial", name: "Trivial", rows: 9, cols: 9, mine_count: 5},
+      %{id: "beginner", name: "Beginner", rows: 9, cols: 9, mine_count: 10},
+      %{id: "intermediate", name: "Intermediate", rows: 16, cols: 16, mine_count: 40},
+      %{id: "expert", name: "Expert", rows: 16, cols: 30, mine_count: 99}
+    ]
+  end
 
   def toggle_flag(game, position) do
     if game.status != :playing, do: raise ArgumentError, message: "Game status must be 'playing', not #{game.status}"

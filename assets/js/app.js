@@ -40,6 +40,20 @@ Hooks.ToggleFlag = {
     }
 }
 
+Hooks.NewGame = {
+    mounted() {
+        let hook = this
+
+        document.body.querySelector("input[name='difficulty']").checked = true;
+        hook.el.parentNode.addEventListener("click", function(e) {
+            e.preventDefault()
+
+            let selectedDifficulty = document.body.querySelector("input[name='difficulty']:checked")
+            hook.pushEvent("new_game", {"difficulty": selectedDifficulty.value})
+        })
+    }
+}
+
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
 let liveSocket = new LiveSocket("/live", Socket, {hooks: Hooks, params: {_csrf_token: csrfToken}})
 

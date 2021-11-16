@@ -3,7 +3,9 @@ defmodule MinesweeperWeb.GameLive do
   use MinesweeperWeb, :live_view
 
   def mount(_params, _, socket) do
-    {:ok, assign(socket, :game, Game.new(:trivial))}
+    socket = assign(socket, :game, Game.new("trivial"))
+    socket = assign(socket, :game_difficulties, Game.difficulties())
+    {:ok, socket, temporary_assigns: [game_difficulties: []]}
   end
 
   def handle_event("reveal", %{"row" => row_str, "col" => col_str}, socket) do
@@ -20,8 +22,8 @@ defmodule MinesweeperWeb.GameLive do
     {:noreply, socket}
   end
 
-  def handle_event("new_game", _params, socket) do
-    socket = assign(socket, :game, Game.new(:expert))
+  def handle_event("new_game", %{"difficulty" => difficulty}, socket) do
+    socket = assign(socket, :game, Game.new(difficulty))
     {:noreply, socket}
   end
 end
