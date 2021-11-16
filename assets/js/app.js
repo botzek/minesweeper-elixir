@@ -30,13 +30,18 @@ let Hooks = {}
 Hooks.ToggleFlag = {
     mounted() {
         let hook = this
-
-        hook.el.parentNode.addEventListener("contextmenu", function(e) {
+        hook.eventListener = function(e) {
             e.preventDefault()
             let row = hook.el.getAttribute("phx-value-row");
             let col = hook.el.getAttribute("phx-value-col");
             hook.pushEvent("toggle_flag", {"row": row, "col": col})
-        })
+        }
+        hook.parentNode = hook.el.parentNode
+        hook.el.parentNode.addEventListener("contextmenu", hook.eventListener)
+    },
+
+    destroyed() {
+        this.parentNode.removeEventListener("contextmenu", this.eventListener)
     }
 }
 
