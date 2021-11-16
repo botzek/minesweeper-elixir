@@ -23,6 +23,8 @@ defmodule Minesweeper.Game do
   def new(:expert), do: new(16, 30, 99)
 
   def toggle_flag(game, position) do
+    if game.status != :playing, do: raise ArgumentError, message: "Game status must be 'playing', not #{game.status}"
+
     state =
       case Map.get(game.board, position) do
         :flagged -> :hidden
@@ -33,6 +35,8 @@ defmodule Minesweeper.Game do
   end
 
   def reveal(game, position) do
+    if game.status != :playing, do: raise ArgumentError, message: "Game status must be 'playing', not #{game.status}"
+
     game
     |> maybe_generate_mines(position)
     |> reveal_recurse(position)
