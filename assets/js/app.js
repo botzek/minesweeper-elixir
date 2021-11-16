@@ -32,8 +32,8 @@ Hooks.ToggleFlag = {
         let hook = this
         hook.eventListener = function(e) {
             e.preventDefault()
-            let row = hook.el.getAttribute("phx-value-row");
-            let col = hook.el.getAttribute("phx-value-col");
+            let row = hook.el.getAttribute("phx-value-row")
+            let col = hook.el.getAttribute("phx-value-col")
             hook.pushEvent("toggle_flag", {"row": row, "col": col})
         }
         hook.parentNode = hook.el.parentNode
@@ -49,7 +49,7 @@ Hooks.NewGame = {
     mounted() {
         let hook = this
 
-        document.body.querySelector("input[name='difficulty']").checked = true;
+        document.body.querySelector("input[name='difficulty']").checked = true
         hook.el.addEventListener("click", function(e) {
             e.preventDefault()
 
