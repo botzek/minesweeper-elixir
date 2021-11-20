@@ -87,3 +87,32 @@
   text-decoration: none;
   cursor: pointer;
 }
+
+
+.board {
+  border: 1px solid;
+  display: inline-block;
+}
+
+.board-cell {
+  float: left;
+  width: 25px;
+  height: 25px;
+  border: 1px solid;
+  text-align: center;
+}
+
+.board-cell-inner {
+  width: 100%;
+  height: 100%;
+}
+
+.board-cell-state-hidden {
+  background-color: #CCC;
+  cursor: pointer;
+}
+
+.board-cell-state-flagged {
+  background-color: #CCC;
+  cursor: pointer;
+}

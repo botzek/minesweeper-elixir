@@ -14,6 +14,10 @@ defmodule Minesweeper.Application do
       MinesweeperWeb.Telemetry,
       # Start the PubSub system
       {Phoenix.PubSub, name: Minesweeper.PubSub},
+      # Monitors live views
+      MinesweeperWeb.LiveMonitor,
+      # Stores in-progress games
+      MinesweeperWeb.GamesInProgress,
       # Start the Endpoint (http/https)
       MinesweeperWeb.Endpoint
       # Start a worker by calling: Minesweeper.Worker.start_link(arg)
